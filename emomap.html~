@@ -1,0 +1,20 @@
+<html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Emotion choropleth</title>
+        <script src="d3.min.js"></script>
+		<script src="topojson.min.js"></script>
+		<script src="datamaps.world.min.js"></script>
+    </head>
+    <body>
+    	<h1 style="position: absolute;font-size: 70px;left:380px;top:100px;">ORBIS SPECTRA</h1>
+       <div id="container" style="position: absolute; width: 1000px; height: 1000px; left:150px;top:0px;"></div>
+    	<script>
+    		var map = new Datamap({element: document.getElementById('container')});
+    		map.legend();
+    		map.updateChoropleth({USA:'red',CAN: 'yellow',IND:'blue',RUS:'darkgreen',BRA:'orange',AUS:'violet'});
+		</script>
+
+    </body>
+</html>

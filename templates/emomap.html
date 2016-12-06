@@ -1,0 +1,54 @@
+<html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Emotion choropleth</title>
+        <script src="{{url_for('static',filename='d3.min.js')}}"></script>
+		<script src="{{url_for('static',filename='topojson.min.js')}}"></script>
+		<script src="{{url_for('static',filename='datamaps.world.min.js')}}"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <style>
+
+          g.legend{
+            opacity: .8;
+          }
+          body{
+            background: linear-gradient(to right, rgba(183,222,237,1) 0%, rgba(113,206,239,1) 27%, rgba(33,180,226,1) 54%, rgba(167,198,219,1) 100%);
+            font-family: Lato, "Open Sans";
+          }
+          h1{
+            text-align: center;
+            color: red;
+            text-shadow: 2px 2px 5px #000000;
+          }
+          strong{
+            color: #FF7F00;
+
+          }
+          svg{
+            padding: 30px 30px 30px 30px;
+            border: 2px solid black;
+            border-style: outset;
+          }
+      </style>
+
+</head>
+    <body>
+    	<h1 >ORBIS <strong>SPECTRA</strong></h1>
+    	<div id="container" style=" width:94%; height:80%;"></div>
+    	<script>
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    		var map = new Datamap({element: document.getElementById('container'),geographyConfig:{borderColor:'black'},
+    		fills:{defaultFill: 'lightgray'}});
+    		map.legend();
+    		//map.updateChoropleth({USA:'green',CAN: 'yellow',IND:'blue',RUS:'darkgreen',BRA:'orange',AUS:'violet'});
+        function updateMap(){
+          $.getJSON($SCRIPT_ROOT + '/colors',function(data){map.updateChoropleth(data);});
+        }
+
+
+        setInterval(updateMap, 3000)
+		</script>
+    <a href="/timeline">Check Timeline</a>
+	</body>
+</html>
